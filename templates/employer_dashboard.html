@@ -63,8 +63,63 @@
         <button type="submit" name='sub2' class="btn btn-primary">Save</button>
         {% endif %}
 
-        
-        
+        <button type="submit" name="profile">profile</button>
+        {% if request.method == 'POST' and 'profile' in request.form %}
+        <div class="container">
+            <!-- <div class="mb-3 col">
+                available
+                <input type="text" name="available" class="form-control" value="{{fulljob[0]}}">
+            </div> -->
+            <!-- <div class="mb-3 col"> -->
+                <!-- id -->
+                <!-- <input type="text" name="mono" class="form-control" value="{{fulljob[1]}}"> -->
+            <!-- </div> -->
+            
+            <!-- <div class="mb-3 col">
+                id
+                <input type="text" name="id" class="form-control" >
+            </div> -->
+            <div class="mb-3 col">
+                name
+                <input type="text" name="name" class="form-control" value="{{profile[1]}}">
+            </div>
+            <div class="mb-3 col">
+                age
+                <input type="text" name="age" class="form-control" value="{{profile[2]}}">
+            </div>
+            <div class="mb-3 col">
+                gender
+                <input type="text" name="gender" class="form-control" value="{{profile[3]}}">
+            </div>
+            <div class="mb-3 col">
+                education
+                <input type="text" name="education" class="form-control" value="{{profile[5]}}">
+            </div>
+            <div class="mb-3 col">
+                mobile
+                <input type="text" name="mobile" class="form-control" value="{{profile[6]}}">
+            </div>
+            <div class="mb-3 col">
+                area
+                <input type="text" name="area" class="form-control" value="{{profile[7]}}">
+            </div>
+            <div class="mb-3 col">
+                city
+                <input type="text" name="city" class="form-control" value="{{profile[8]}}">
+            </div>
+            <div class="mb-3 col">
+                email_id
+                <input type="text" name="email_id" class="form-control" value="{{profile[10]}}">
+            </div>
+            <div class="mb-3 col">
+                password
+                <input type="text" name="password" class="form-control" value="{{profile[9]}}">
+            </div>
+        </div>
+        <button type="submit" name="sub4">save profile</button>
+        {% endif %}
+
+
         <button type="submit" name="newjob">new job</button>
         {% if request.method == 'POST' and 'newjob' in request.form %}
         <div class="container">

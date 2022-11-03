@@ -1,3 +1,33 @@
+requests table
+job seeker creates skills
+jobs has requirements
+
+=================================
+employer dashboard:
+1. see and accept appicants
+
+login
+logout
+
+job seeker: 
+registration 
+
+dashborad:
+search jobs
+
+==================================
+employer dashboard:
+1. update profile
+2. update job
+3. list of jobs created
+4. new job
+
+employer registration
+
+job seeker dashboard:
+update profile
+==================================
+
 small jobs project
 
 dbms : part time job management system
@@ -35,6 +65,3 @@ tables:
 	details and password
 
 
-requests table
-job seeker creates skills
-jobs has requirements
