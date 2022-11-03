@@ -1,0 +1,40 @@
+small jobs project
+
+dbms : part time job management system
+
+mail id se register
+
+part timers:
+name, age, gender, photo, loaction, 
+working preferences: timing, salary, 
+education, 
+contact details
+available/ not avilable
+
+
+hirers:
+name, shop name, address, gender, photo, 
+requirements qualification age gender language
+salary
+contact details
+looking/ not loking
+
+can ask
+like dislike
+
+
+har ek ka dashboard
+profile edit kar sakte
+
+tables:
+
+1. part timers
+	details and password
+	
+2. hirers
+	details and password
+
+
+requests table
+job seeker creates skills
+jobs has requirements
