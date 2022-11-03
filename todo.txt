@@ -4,16 +4,13 @@ jobs has requirements
 
 =================================
 employer dashboard:
-1. see and accept appicants
+1. see and accept applicants
 
 login
 logout
 
-job seeker: 
-registration 
-
-dashborad:
-search jobs
+job seeker dashborad:
+1. search jobs
 
 ==================================
 employer dashboard:
@@ -22,7 +19,7 @@ employer dashboard:
 3. list of jobs created
 4. new job
 
-employer registration
+registration
 
 job seeker dashboard:
 update profile

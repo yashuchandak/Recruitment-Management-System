@@ -12,12 +12,19 @@ command_handler = db.cursor(buffered=True)
 
 @app.route('/', methods =['GET', 'POST'])
 def login():
+    
+    if request.method=="POST" and 'regemp' in request.form:
+        return redirect(url_for('registration'))
+
+    
     if request.method=='POST' and ('pass' and 'email' in request.form):
         
         email = request.form['email']
         passw = request.form['pass']
         lis = [email, passw]
         
+    
+    
         if request.form.get('exampleRadios')=="option1":
             command_handler.execute("SELECT name, id FROM employer WHERE email_id=%s AND password=%s", lis)
             present=command_handler.fetchone()
@@ -30,6 +37,7 @@ def login():
             if present:
                 session['admin'] = 'admin'
                 return redirect(url_for('job_seeker_dashboard', name=present[0], jsid=present[1]))
+    
     
     return render_template('login.html')
 
@@ -158,21 +166,24 @@ def job_seeker_dashboard(name, jsid):
 
     return render_template('job_seeker_dashboard.html', name=name, profile=profile)
 
-@app.route('/employer_registration', methods=['GET', 'POST'])
-def employer_registration():
+@app.route('/registration', methods=['GET', 'POST'])
+def registration():
     if request.method=='POST' and 'name' in request.form:
-        fetch = ['name', 'age', 'gender', 'likes', 'education', 'mobile', 'area', 'city', 'password', 'email_id']
+        fetch = ['name', 'age', 'gender', 'education', 'mobile', 'area', 'city', 'password', 'email_id']
 
         query_vals = []
     
         for i in range(len(fetch)):
             query_vals.append(request.form[fetch[i]])
 
-        command_handler.execute("INSERT INTO employer (name, age, gender, likes, education, mobile, area, city, password, email_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", query_vals)
+        if request.form.get('who')=="emp":
+            command_handler.execute("INSERT INTO employer (name, age, gender, education, mobile, area, city, password, email_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", query_vals)
+        else:
+            command_handler.execute("INSERT INTO job_seeker (name, age, gender, education, mobile, area, city, password, email_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", query_vals)
 
         db.commit()
     
-    return render_template("employer_registration.html")
+    return render_template("registration.html")
 
 
 # @app.route('/add_job', methods=['GET', 'POST'])
