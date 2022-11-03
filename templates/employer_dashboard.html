@@ -7,160 +7,129 @@
     <title>employer_dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
+<body class="m-4">
     <h3>Welcome {{name}}</h3>
     {% for i in jobs %}
-        {{i}}
+        <div>{{i}}</div>
     {% endfor %}
+    <div style="height: 20pt;"></div>
     <form method="POST">
-        <div style="width: 150pt;">
-            <label>Enter jobid</label>
-            <input name="jobid" type="text" class="form-control ms-2"
-                aria-describedby="button-addon2" value="{{request.form['jobid']}}">
-            <!-- <div class="input-group-append"> -->
-            <button class="btn btn-outline-secondary" type="submit" name='sub1' id="button-addon2">Go</button>
-            <!-- </div> -->
+        <div style="width: 200pt;">
+            <label>Update Job application</label>
+            <input name="jobid" type="text" value="{{request.form['jobid']}}" placeholder="Enter Job ID">
+            <button type="submit" name='sub1'>Go</button>
         </div>
         {% if request.method == 'POST' and 'sub1' in request.form %}
-        <div class="container">
-            <div class="mb-3 col">
+        <div style="width: 180pt;">
+            <div class="m-2">
                 available
-                <input type="text" name="available" class="form-control" value="{{fulljob[0]}}">
+                <input type="text" name="available" value="{{fulljob[0]}}">
             </div>
-            <!-- <div class="mb-3 col"> -->
-                <!-- id -->
-                <!-- <input type="text" name="mono" class="form-control" value="{{fulljob[1]}}"> -->
-            <!-- </div> -->
-            <div class="mb-3 col">
+            <div class="m-2">
                 timing
-                <input type="text" name="timing" class="form-control" value="{{fulljob[2]}}">
+                <input type="text" name="timing" value="{{fulljob[2]}}">
             </div>
-            <div class="mb-3 col">
+            <div class="m-2">
                 requirement
-                <input type="text" name="requirement" class="form-control" value="{{fulljob[3]}}">
+                <input type="text" name="requirement" value="{{fulljob[3]}}">
             </div>
-            <div class="mb-3 col">
+            <div class="m-2">
                 city
-                <input type="text" name="city" class="form-control" value="{{fulljob[4]}}">
+                <input type="text" name="city" value="{{fulljob[4]}}">
             </div>
-            <div class="mb-3 col">
+            <div class="m-2">
                 role
-                <input type="text" name="role" class="form-control" value="{{fulljob[5]}}">
+                <input type="text" name="role" value="{{fulljob[5]}}">
             </div>
-            <!-- <div class="mb-3 col"> -->
-                <!-- eid -->
-                <!-- <input type="text" name="p1mono" class="form-control" value="{{fulljob[6]}}"> -->
-            <!-- </div> -->
-            <div class="mb-3 col">
+            <div class="m-2">
                 salary
-                <input type="text" name="salary" class="form-control" value="{{fulljob[7]}}">
+                <input type="text" name="salary" value="{{fulljob[7]}}">
             </div>
-            <div class="mb-3 col">
+            <div class="m-2">
                 work location
-                <input type="text" name="work_location" class="form-control" value="{{fulljob[8]}}">
+                <input type="text" name="work_location" value="{{fulljob[8]}}">
             </div>
         </div>
-        <button type="submit" name='sub2' class="btn btn-primary">Save</button>
+        <div style="height: 10pt;"></div>
+        <button type="submit" name='sub2'>Save Application</button>
         {% endif %}
 
+        <div style="height: 20pt;"></div>
         <button type="submit" name="profile">profile</button>
         {% if request.method == 'POST' and 'profile' in request.form %}
-        <div class="container">
-            <!-- <div class="mb-3 col">
-                available
-                <input type="text" name="available" class="form-control" value="{{fulljob[0]}}">
-            </div> -->
-            <!-- <div class="mb-3 col"> -->
-                <!-- id -->
-                <!-- <input type="text" name="mono" class="form-control" value="{{fulljob[1]}}"> -->
-            <!-- </div> -->
-            
-            <!-- <div class="mb-3 col">
-                id
-                <input type="text" name="id" class="form-control" >
-            </div> -->
-            <div class="mb-3 col">
-                name
-                <input type="text" name="name" class="form-control" value="{{profile[1]}}">
+        <div style="width: 180pt;">
+            <div class="m-2">
+                Name
+                <input type="text" name="name" value="{{profile[1]}}">
             </div>
-            <div class="mb-3 col">
-                age
-                <input type="text" name="age" class="form-control" value="{{profile[2]}}">
+            <div class="m-2">
+                Age
+                <input type="text" name="age" value="{{profile[2]}}">
             </div>
-            <div class="mb-3 col">
-                gender
-                <input type="text" name="gender" class="form-control" value="{{profile[3]}}">
+            <div class="m-2">
+                Gender
+                <input type="text" name="gender" value="{{profile[3]}}">
             </div>
-            <div class="mb-3 col">
-                education
-                <input type="text" name="education" class="form-control" value="{{profile[5]}}">
+            <div class="m-2">
+                Education
+                <input type="text" name="education" value="{{profile[5]}}">
             </div>
-            <div class="mb-3 col">
-                mobile
-                <input type="text" name="mobile" class="form-control" value="{{profile[6]}}">
+            <div class="m-2">
+                Mobile
+                <input type="text" name="mobile" value="{{profile[6]}}">
             </div>
-            <div class="mb-3 col">
-                area
-                <input type="text" name="area" class="form-control" value="{{profile[7]}}">
+            <div class="m-2">
+                Area
+                <input type="text" name="area" value="{{profile[7]}}">
             </div>
-            <div class="mb-3 col">
-                city
-                <input type="text" name="city" class="form-control" value="{{profile[8]}}">
+            <div class="m-2">
+                City
+                <input type="text" name="city" value="{{profile[8]}}">
             </div>
-            <div class="mb-3 col">
-                email_id
-                <input type="text" name="email_id" class="form-control" value="{{profile[10]}}">
+            <div class="m-2">
+                Email id
+                <input type="text" name="email_id" value="{{profile[10]}}">
             </div>
-            <div class="mb-3 col">
-                password
-                <input type="text" name="password" class="form-control" value="{{profile[9]}}">
+            <div class="m-2">
+                Password
+                <input type="text" name="password" value="{{profile[9]}}">
             </div>
-        </div>
+        </div class="m-2">
+        <div style="height: 10pt;"></div>
         <button type="submit" name="sub4">save profile</button>
         {% endif %}
 
-
+        <div style="height: 20pt;"></div>
         <button type="submit" name="newjob">new job</button>
         {% if request.method == 'POST' and 'newjob' in request.form %}
-        <div class="container">
-            <!-- <div class="mb-3 col">
-                available
-                <input type="text" name="available" class="form-control" value="{{fulljob[0]}}">
-            </div> -->
-            <!-- <div class="mb-3 col"> -->
-                <!-- id -->
-                <!-- <input type="text" name="mono" class="form-control" value="{{fulljob[1]}}"> -->
-            <!-- </div> -->
-            <div class="mb-3 col">
-                timing
-                <input type="text" name="ntiming" class="form-control" >
+        <div style="width: 180pt;">
+            <div class="m-2">
+                Timing
+                <input type="text" name="ntiming" >
             </div>
-            <div class="mb-3 col">
-                requirement
-                <input type="text" name="nrequirement" class="form-control" >
+            <div class="m-2">
+                Requirement
+                <input type="text" name="nrequirement" >
             </div>
-            <div class="mb-3 col">
-                city
-                <input type="text" name="ncity" class="form-control" >
+            <div class="m-2">
+                City
+                <input type="text" name="ncity" >
             </div>
-            <div class="mb-3 col">
-                role
-                <input type="text" name="nrole" class="form-control" >
+            <div class="m-2">
+                Role
+                <input type="text" name="nrole" >
             </div>
-            <!-- <div class="mb-3 col"> -->
-                <!-- eid -->
-                <!-- <input type="text" name="p1mono" class="form-control" value="{{fulljob[6]}}"> -->
-            <!-- </div> -->
-            <div class="mb-3 col">
-                salary
-                <input type="text" name="nsalary" class="form-control">
+            <div class="m-2">
+                Salary
+                <input type="text" name="nsalary" >
             </div>
-            <div class="mb-3 col">
-                work location
-                <input type="text" name="nwork_location" class="form-control">
+            <div class="m-2">
+                Work location
+                <input type="text" name="nwork_location" >
             </div>
         </div>
-        <button type="submit" name="sub3">save job</button>
+        <div style="height: 10pt;"></div>
+        <button type="submit" name="sub3">Save Job</button>
         {% endif %}
     </form>
     
