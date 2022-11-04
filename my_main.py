@@ -10,6 +10,11 @@ db = connector.connect(host = "localhost", user = "root", password = "Mysqlroot"
 
 command_handler = db.cursor(buffered=True)
 
+@app.after_request
+def after_request(response):
+    response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')   
+    return response 
+
 @app.route('/', methods =['GET', 'POST'])
 def login():
     
@@ -46,10 +51,10 @@ def employer_dashboard(name,eid):
     # print(name)
     fulljob=[]
     profile=[]
-    jobseekers = []
+    jobseekers = [] 
     if 'admin' not in session:
         return redirect(url_for('login'))
-    command_handler.execute("SELECT id, role, available FROM job WHERE eid=%s", (eid,))
+    command_handler.execute("SELECT id, role, timing, requirement, salary, available FROM job WHERE eid=%s", (eid,))
     lis=command_handler.fetchall()
     # print(lis)
     if request.method=='POST' and ('seejobid' and 'see') in request.form:
@@ -124,6 +129,10 @@ def employer_dashboard(name,eid):
 
         db.commit()
 
+    if request.method=="POST" and 'logo' in request.form:
+        session.pop('admin', None)
+        return redirect(url_for('login'))
+    
     return render_template('employer_dashboard.html', name=name, jobs=lis, fulljob=fulljob, profile=profile, jobseekers=jobseekers)
 
 
@@ -196,6 +205,9 @@ def search_job(jsid):
 
     jobs=[[]]
 
+    if 'admin' not in session:
+        return redirect(url_for('login'))
+
     command_handler.execute("SELECT city FROM job_seeker WHERE id=%s", (jsid,))
     defcity=command_handler.fetchone()
 
@@ -208,19 +220,20 @@ def search_job(jsid):
 
         defcity=""
 
-        command_handler.execute("Select id, role, salary, timing, requirement FROM job WHERE salary>=%s AND city=%s", (minsal, city,))
+        command_handler.execute("Select id, role, timing, requirement, salary, work_location, contact FROM job WHERE salary>=%s AND city=%s", (minsal, city,))
         jobs=command_handler.fetchall()
 
         # print(jobs)
     if request.method=="POST" and 'apply' in request.form:
         jobid = request.form['jobid']
-        command_handler.execute("INSERT INTO request VALUES(%s, %s)", (jobid, jsid,))
+        command_handler.execute("INSERT INTO request VALUES(%s, %s, 0)", (jobid, jsid,))
         db.commit()
     
     return render_template('search_job.html', city=defcity, jobs=jobs)
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
+
     if request.method=='POST' and 'name' in request.form:
         fetch = ['name', 'age', 'gender', 'education', 'mobile', 'area', 'city', 'password', 'email_id']
 

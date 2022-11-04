@@ -5,15 +5,17 @@ jobs has requirements
 =================================
 employer dashboard:
 
-login
-logout
-
 job seeker dashborad:
 search jobs:
 3. shift
 4. role
 
 ==================================
+decoration:
+
+record saved
+
+jif konsa part kb  
 
 ==================================
 
