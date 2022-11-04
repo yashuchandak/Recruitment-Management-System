@@ -10,6 +10,8 @@ search jobs:
 3. shift
 4. role
 
+on delete cascade
+mail
 ==================================
 decoration:
 
