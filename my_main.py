@@ -46,11 +46,34 @@ def employer_dashboard(name,eid):
     # print(name)
     fulljob=[]
     profile=[]
+    jobseekers = []
     if 'admin' not in session:
         return redirect(url_for('login'))
     command_handler.execute("SELECT id, role, available FROM job WHERE eid=%s", (eid,))
     lis=command_handler.fetchall()
     # print(lis)
+    if request.method=='POST' and ('seejobid' and 'see') in request.form:
+        # print("df")
+        jobid=request.form['seejobid']
+        command_handler.execute("SELECT jsid FROM request WHERE jobid=%s", (jobid,))
+        jsidstemp = command_handler.fetchall()
+        # print(jsidstemp)
+        jsids = ""
+        for i in jsidstemp:
+            jsids += str(i[0]) + ","
+        jsids = jsids[0:len(jsids)-1]
+        command_handler.execute("SELECT id, name, age, gender, likes, education, city, mobile, email_id FROM job_seeker WHERE id in ({})".format(jsids))
+        jobseekers = command_handler.fetchall()
+        # print("")
+        # print(jobseekers)
+        # print("")
+
+    if request.method=="POST" and ('reqjsid' and 'accreq' in request.form):
+        # print("hi")
+        reqjsid = request.form['reqjsid']
+        command_handler.execute("UPDATE request SET accepted=1 WHERE jsid=%s", (reqjsid,))
+        db.commit()
+
     if request.method=='POST' and 'jobid' in request.form:
         jobid=request.form['jobid']
         command_handler.execute("SELECT * FROM job WHERE id=%s", (jobid,))
@@ -101,7 +124,7 @@ def employer_dashboard(name,eid):
 
         db.commit()
 
-    return render_template('employer_dashboard.html', name=name, jobs=lis, fulljob=fulljob, profile=profile)
+    return render_template('employer_dashboard.html', name=name, jobs=lis, fulljob=fulljob, profile=profile, jobseekers=jobseekers)
 
 
 @app.route('/job_seeker_dashboard<name><jsid>', methods=['GET', 'POST'])
@@ -111,11 +134,13 @@ def job_seeker_dashboard(name, jsid):
     profile=[]
     if 'admin' not in session:
         return redirect(url_for('login'))
+    
     # command_handler.execute("SELECT id, role, available FROM job WHERE eid=%s", (eid,))
     # lis=command_handler.fetchall()
     # # print(lis)
-    # if request.method=='POST' and 'jobid' in request.form:
-    #     jobid=request.form['jobid']
+    if request.method=='POST' and 'searchjob' in request.form:
+        return redirect(url_for('search_job', jsid=jsid))
+        #     jobid=request.form['jobid']
     #     command_handler.execute("SELECT * FROM job WHERE id=%s", (jobid,))
     #     fulljob = command_handler.fetchone()
     #     # print(fulljob)
@@ -165,6 +190,34 @@ def job_seeker_dashboard(name, jsid):
         db.commit()
 
     return render_template('job_seeker_dashboard.html', name=name, profile=profile)
+
+@app.route('/search_job<jsid>', methods=['GET', 'POST'])
+def search_job(jsid):
+
+    jobs=[[]]
+
+    command_handler.execute("SELECT city FROM job_seeker WHERE id=%s", (jsid,))
+    defcity=command_handler.fetchone()
+
+    if request.method=="POST":
+        
+        # print("hi")
+
+        city = request.form['city']
+        minsal = request.form['salary'] 
+
+        defcity=""
+
+        command_handler.execute("Select id, role, salary, timing, requirement FROM job WHERE salary>=%s AND city=%s", (minsal, city,))
+        jobs=command_handler.fetchall()
+
+        # print(jobs)
+    if request.method=="POST" and 'apply' in request.form:
+        jobid = request.form['jobid']
+        command_handler.execute("INSERT INTO request VALUES(%s, %s)", (jobid, jsid,))
+        db.commit()
+    
+    return render_template('search_job.html', city=defcity, jobs=jobs)
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():

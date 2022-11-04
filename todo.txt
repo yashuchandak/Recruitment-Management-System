@@ -4,25 +4,17 @@ jobs has requirements
 
 =================================
 employer dashboard:
-1. see and accept applicants
 
 login
 logout
 
 job seeker dashborad:
-1. search jobs
+search jobs:
+3. shift
+4. role
 
 ==================================
-employer dashboard:
-1. update profile
-2. update job
-3. list of jobs created
-4. new job
 
-registration
-
-job seeker dashboard:
-update profile
 ==================================
 
 small jobs project
