@@ -12,14 +12,16 @@ search jobs:
 
 employer se education and age nhi leni
 on delete cascade
-==================================
-decoration:
-
+applied jobs
+vacancies avilable
 record saved
 
 jif konsa part kb  
 
 error handling user already exists ...
+
+==================================
+decoration:
 ==================================
 
 small jobs project

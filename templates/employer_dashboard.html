@@ -27,6 +27,8 @@
             <th class="padin6">Requirements</th>
             <th class="padin6">Salary</th>
             <th class="padin6">Available</th>
+            <th class="padin6">Organization name</th>
+            <th class="padin6">Contact</th>
         </tr>
     {% for i in jobs %}
         <tr style="border-bottom: 1pt solid">
@@ -36,6 +38,8 @@
             <td class="padin6">{{i[3]}}</td>
             <td class="padin6">{{i[4]}}</td>
             <td class="padin6">{{i[5]}}</td>
+            <td class="padin6">{{i[6]}}</td>
+            <td class="padin6">{{i[7]}}</td>
         </tr>
     {% endfor %}
     </table>
@@ -46,7 +50,7 @@
         <input type="text" name="seejobid" placeholder="Enter Job ID">
         <button type="submit" name="see">Go</button>
         <div style="height: 10pt;"></div>
-        {% if request.method=="POST" and "seejobid" in request.form %}
+        {% if request.method=="POST" and "see" in request.form %}
         
         <table>
             <tr style="border-bottom: 1pt solid">
@@ -115,8 +119,16 @@
                 <input type="text" name="salary" value="{{fulljob[7]}}">
             </div>
             <div class="m-2">
-                Worklocation<br>
-                <input type="text" name="work_location" value="{{fulljob[8]}}">
+                Area<br>
+                <input type="text" name="area" value="{{fulljob[8]}}">
+            </div>
+            <div class="m-2">
+                Contact<br>
+                <input type="text" name="contact" value="{{fulljob[9]}}">
+            </div>
+            <div class="m-2">
+                Organization name<br>
+                <input type="text" name="orgname" value="{{fulljob[10]}}">
             </div>
         </div>
         <div style="height: 10pt;"></div>
@@ -129,7 +141,7 @@
         <div style="width: 180pt;">
             <div class="m-2">
                 Name
-                <input required type="text" name="name" value="{{profile[1]}}">
+                <input required type="text" name="name" value="{{profile[0]}}">
             </div>
             <!-- <div class="m-2">
                 Age
@@ -137,31 +149,31 @@
             </div> -->
             <div class="m-2">
                 Gender
-                <input required type="text" name="gender" value="{{profile[3]}}">
+                <input required type="text" name="gender" value="{{profile[1]}}">
             </div>
             <div class="m-2">
                 Business name
-                <input required type="text" name="education" value="{{profile[5]}}">
+                <input required type="text" name="education" value="{{profile[2]}}">
             </div>
             <div class="m-2">
                 Mobile
-                <input type="text" name="mobile" value="{{profile[6]}}">
+                <input type="text" name="mobile" value="{{profile[3]}}">
             </div>
             <!-- <div class="m-2">
                 Area
                 <input type="text" name="area" value="{{profile[7]}}">
             </div> -->
-            <!-- <div class="m-2">
+            <div class="m-2">
                 City
-                <input type="text" name="city" value="{{profile[8]}}">
-            </div> -->
+                <input type="text" name="city" value="{{profile[4]}}">
+            </div>
             <div class="m-2">
                 Email id
-                <input required type="email" name="email_id" value="{{profile[10]}}">
+                <input required type="email" name="email_id" value="{{profile[5]}}">
             </div>
             <div class="m-2">
                 Password
-                <input required type="pasword" name="password" value="{{profile[9]}}">
+                <input required type="pasword" name="password" value="{{profile[6]}}">
             </div>
         </div class="m-2">
         <div style="height: 10pt;"></div>
@@ -174,7 +186,11 @@
         <div style="width: 180pt;">
             <div class="m-2">
                 Role
-                <input required type="text" name="nrole" >
+                <select required type name="nrole" >
+                    {% for i in roles %}
+                        <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="m-2">
                 Timing
@@ -189,12 +205,20 @@
                 <input required type="text" name="ncity" >
             </div>
             <div class="m-2">
-                Salary
+                Salary per month
                 <input required type="text" name="nsalary" >
             </div>
             <div class="m-2">
                 Area
-                <input type="text" name="nwork_location" >
+                <input type="text" name="narea" >
+            </div>
+            <div class="m-2">
+                Contact
+                <input type="text" name="ncontact" >
+            </div>
+            <div class="m-2">
+                Organization name
+                <input type="text" name="norgname" >
             </div>
         </div>
         <div style="height: 10pt;"></div>
@@ -203,11 +227,7 @@
         <br>
         <br>
         <button type="submit" name="logo">Logout</button>
-    </form>
+        </form>
     
-    
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+    </body>
 </html>

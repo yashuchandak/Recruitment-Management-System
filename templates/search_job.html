@@ -19,11 +19,19 @@
         <form method="POST">
             <div class="m-2">
                 City<br>
-                <input required type="text" name="city" value="{{city[0]}}">
+                <input type="text" name="city" value="{{city[0]}}">
             </div>
             <div class="m-2">
                 Minimum salary<br>
-                <input required type="text" name="salary">
+                <input type="text" name="salary">
+            </div>
+            <div class="m-2">
+                Role<br>
+                <select multiple name="role" style="height: 200pt; width: 150pt">
+                    {% for i in roles %}
+                        <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+                </select>
             </div>
             <!-- <div class="m-2">
                 Shift
@@ -34,7 +42,7 @@
                 <input type="text" name="role">
             </div> -->
             <div class="m-3">
-                <button type="submit">Search</button>
+                <button type="submit" name="search">Search</button>
             </div>
         
 
