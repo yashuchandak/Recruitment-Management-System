@@ -17,6 +17,7 @@ record saved
 
 jif konsa part kb  
 
+error handling usser already exists ...
 ==================================
 
 small jobs project
