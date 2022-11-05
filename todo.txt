@@ -1,4 +1,4 @@
-requests table
+
 job seeker creates skills
 jobs has requirements
 
@@ -8,22 +8,23 @@ employer dashboard:
 job seeker dashborad:
 search jobs:
 3. shift
-4. role
 
 employer se education and age nhi leni
 on delete cascade
 applied jobs
-vacancies avilable
+vacancies available
+
 record saved
-
 jif konsa part kb  
-
 error handling user already exists ...
 
-==================================
-decoration:
-==================================
+=======================================
+search job_seekers
+profile photo
 
+ppt
+
+=======================================
 small jobs project
 
 dbms : part time job management system

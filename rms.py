@@ -29,8 +29,9 @@ def login():
         lis = [email, passw]
         
     
-    
-        if request.form.get('exampleRadios')=="option1":
+        command_handler.execute("select id from employer where email_id=%s", (email,))
+        prez = command_handler.fetchone()
+        if prez:
             command_handler.execute("SELECT name, id FROM employer WHERE email_id=%s AND password=%s", lis)
             present=command_handler.fetchone()
             if present:
