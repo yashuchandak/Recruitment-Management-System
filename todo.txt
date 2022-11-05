@@ -10,8 +10,8 @@ search jobs:
 3. shift
 4. role
 
-
 employer se education and age nhi leni
+on delete cascade
 ==================================
 decoration:
 
