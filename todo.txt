@@ -10,6 +10,8 @@ search jobs:
 3. shift
 4. role
 
+
+employer se education and age nhi leni
 ==================================
 decoration:
 
@@ -17,7 +19,7 @@ record saved
 
 jif konsa part kb  
 
-error handling usser already exists ...
+error handling user already exists ...
 ==================================
 
 small jobs project
