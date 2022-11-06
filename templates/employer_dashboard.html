@@ -47,7 +47,7 @@
     
     <form method="POST">
         See Applications<br>
-        <input type="text" name="seejobid" placeholder="Enter Job ID">
+        <input type="text" name="seejobid" value="{{request.form['seejobid']}}" placeholder="Enter Job ID">
         <button type="submit" name="see">Go</button>
         <div style="height: 10pt;"></div>
         {% if request.method=="POST" and "see" in request.form %}
@@ -89,7 +89,7 @@
         <div style="height: 20pt;"></div>
         <div>
             <label>Update Job Application</label><br>
-            <input name="jobid" type="text" value="{{request.form['jobid']}}" placeholder="Enter Job ID">
+            <input name="jobid" type="text" placeholder="Enter Job ID">
             <button type="submit" name='sub1'>Go</button>
         </div>
         {% if request.method == 'POST' and 'sub1' in request.form %}
@@ -100,35 +100,35 @@
             </div>
             <div class="m-2">
                 Timing<br>
-                <input type="text" name="timing" value="{{fulljob[2]}}">
+                <input type="text" name="timing" value="{{fulljob[1]}}">
             </div>
             <div class="m-2">
                 Requirements<br>
-                <input type="text" name="requirement" value="{{fulljob[3]}}">
+                <input type="text" name="requirement" value="{{fulljob[2]}}">
             </div>
             <div class="m-2">
                 City<br>
-                <input type="text" name="city" value="{{fulljob[4]}}">
+                <input type="text" name="city" value="{{fulljob[3]}}">
             </div>
             <div class="m-2">
                 Role<br>
-                <input type="text" name="role" value="{{fulljob[5]}}">
+                <input type="text" name="role" value="{{fulljob[4]}}">
             </div>
             <div class="m-2">
                 Salary<br>
-                <input type="text" name="salary" value="{{fulljob[7]}}">
+                <input type="text" name="salary" value="{{fulljob[5]}}">
             </div>
             <div class="m-2">
                 Area<br>
-                <input type="text" name="area" value="{{fulljob[8]}}">
+                <input type="text" name="area" value="{{fulljob[6]}}">
             </div>
             <div class="m-2">
                 Contact<br>
-                <input type="text" name="contact" value="{{fulljob[9]}}">
+                <input type="text" name="contact" value="{{fulljob[7]}}">
             </div>
             <div class="m-2">
                 Organization name<br>
-                <input type="text" name="orgname" value="{{fulljob[10]}}">
+                <input type="text" name="orgname" value="{{fulljob[8]}}">
             </div>
         </div>
         <div style="height: 10pt;"></div>
@@ -143,10 +143,6 @@
                 Name
                 <input required type="text" name="name" value="{{profile[0]}}">
             </div>
-            <!-- <div class="m-2">
-                Age
-                <input type="text" name="age" value="{{profile[2]}}">
-            </div> -->
             <div class="m-2">
                 Gender
                 <input required type="text" name="gender" value="{{profile[1]}}">
@@ -159,10 +155,6 @@
                 Mobile
                 <input type="text" name="mobile" value="{{profile[3]}}">
             </div>
-            <!-- <div class="m-2">
-                Area
-                <input type="text" name="area" value="{{profile[7]}}">
-            </div> -->
             <div class="m-2">
                 City
                 <input type="text" name="city" value="{{profile[4]}}">

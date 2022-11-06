@@ -56,6 +56,7 @@ def employer_dashboard(name,eid):
     fulljob=[]
     profile=[]
     jobseekers = [[]] 
+    # jbid=-1
     if 'admin' not in session:
         return redirect(url_for('login'))
     command_handler.execute("SELECT id, role, timing, requirement, salary, available, organization_name, contact FROM job WHERE eid=%s", (eid,))
@@ -64,6 +65,7 @@ def employer_dashboard(name,eid):
     if request.method=='POST' and ('seejobid' and 'see') in request.form:
         # print("df")
         jobid=request.form['seejobid']
+        # jbid=jobid
         command_handler.execute("SELECT jsid FROM request WHERE jobid=%s", (jobid,))
         jsidstemp = command_handler.fetchall()
         # print(jsidstemp)
@@ -79,14 +81,15 @@ def employer_dashboard(name,eid):
         # print("")
 
     if request.method=="POST" and ('reqjsid' and 'accreq' in request.form):
-        # print("hi")
+        # print(jobid)
+        jobid=request.form['seejobid']
         reqjsid = request.form['reqjsid']
-        command_handler.execute("UPDATE request SET accepted=1 WHERE jsid=%s", (reqjsid,))
+        command_handler.execute("UPDATE request SET accepted=1 WHERE jsid=%s AND jobid=%s", (reqjsid, jobid,))
         db.commit()
 
     if request.method=='POST' and 'jobid' in request.form:
         jobid=request.form['jobid']
-        command_handler.execute("SELECT * FROM job WHERE id=%s", (jobid,))
+        command_handler.execute("SELECT available, timing, requirement, city, role, salary, area, contact, organization_name FROM job WHERE id=%s", (jobid,))
         fulljob = command_handler.fetchone()
         # print(fulljob)
 
@@ -146,52 +149,17 @@ def employer_dashboard(name,eid):
 
 @app.route('/job_seeker_dashboard<name><jsid>', methods=['GET', 'POST'])
 def job_seeker_dashboard(name, jsid):
-    # print(name)
-    # fulljob=[]
+    
     profile=[]
     if 'admin' not in session:
         return redirect(url_for('login'))
     
-    # command_handler.execute("SELECT id, role, available FROM job WHERE eid=%s", (eid,))
-    # lis=command_handler.fetchall()
-    # # print(lis)
     if request.method=='POST' and 'searchjob' in request.form:
         return redirect(url_for('search_job', jsid=jsid))
-        #     jobid=request.form['jobid']
-    #     command_handler.execute("SELECT * FROM job WHERE id=%s", (jobid,))
-    #     fulljob = command_handler.fetchone()
-    #     # print(fulljob)
-
-    #     if request.method == 'POST' and 'sub2' in request.form:
-    #         fetch = ['available','timing','requirement','city','role','salary','work_location']
-    #         query_vals = []
-            
-    #         for i in range(0, len(fetch)):
-    #             query_vals.append(request.form[fetch[i]])
-        
-    #         command_handler.execute("UPDATE job SET available=%s, timing=%s, requirement=%s,city=%s,role=%s,salary=%s,work_location=%s", query_vals)
-    #         db.commit()
-            
-    #         command_handler.execute("SELECT * FROM job WHERE id = %s",(jobid,))
-    #         fulljob = command_handler.fetchone()
-        
-    # if request.method == 'POST' and 'sub3' in request.form:
-    #     fetch = ['ntiming', 'nrequirement', 'ncity', 'nrole', 'nsalary', 'nwork_location']
-
-    #     query_vals = []
     
-    #     for i in range(len(fetch)):
-    #         query_vals.append(request.form[fetch[i]])
-    #     query_vals.append(eid)
-
-    #     command_handler.execute("INSERT INTO job (available, timing, requirement, city, role, salary, work_location, eid) VALUES (1, %s, %s, %s, %s, %s,  %s, %s)", query_vals)
-
-    #     db.commit()
-
     command_handler.execute("SELECT * FROM job_seeker where id=%s", (jsid,))
     profile=command_handler.fetchone()
-    # print(profile)
-
+    
     if request.method == 'POST' and 'sub4' in request.form:
         
         fetch = ['name', 'age', 'gender', 'education', 'mobile', 'area', 'city', 'email_id', 'password']
@@ -205,6 +173,10 @@ def job_seeker_dashboard(name, jsid):
         command_handler.execute("UPDATE job_seeker SET name=%s, age=%s, gender=%s, education=%s, mobile=%s, area=%s, city=%s, email_id=%s, password=%s WHERE id=%s", query_vals)
 
         db.commit()
+
+    if request.method=="POST" and 'logo' in request.form:
+        session.pop('admin', None)
+        return redirect(url_for('login'))
 
     return render_template('job_seeker_dashboard.html', name=name, profile=profile)
 
@@ -220,23 +192,18 @@ def search_job(jsid):
     defcity=command_handler.fetchone()
 
     if request.method=="POST" and 'search' in request.form:
-        
-        # print("hi")
-
+    
         city = request.form['city']
         minsal = request.form['salary'] 
         test = request.form.getlist('role')
-        # print(test)
         defcity=""
         rolestr = ""
         for i in test:
             rolestr += '"' + i + '"' + ","
         rolestr = rolestr[0:len(rolestr)-1]
-        # print(rolestr)
         command_handler.execute("Select id, role, timing, requirement, salary, area, contact FROM job WHERE salary>=%s AND city=%s AND role IN ({})".format(rolestr), (minsal, city,))
         jobs=command_handler.fetchall()
 
-        # print(jobs)
     if request.method=="POST" and 'apply' in request.form:
         jobid = request.form['jobid']
         command_handler.execute("INSERT INTO request VALUES(%s, %s, 0)", (jobid, jsid,))
@@ -269,23 +236,6 @@ def registration():
         db.commit()
     
     return render_template("registration.html")
-
-
-# @app.route('/add_job', methods=['GET', 'POST'])
-# def add_job():
-#     if request.method=='POST' and 'role' in request.form:
-#         fetch = ['timing', 'requirement', 'city', 'role', 'eid', 'salary', 'work_location']
-
-#         query_vals = []
-    
-#         for i in range(len(fetch)):
-#             query_vals.append(request.form[fetch[i]])
-
-#         command_handler.execute("INSERT INTO job (available, timing, requirement, city, role, eid, salary, work_location) VALUES (1, %s, %s, %s, %s, %s, %s, %s, %s)", query_vals)
-
-#         db.commit()
-    
-#     return render_template("add_job.html")
 
     
 if __name__ == "__main__":

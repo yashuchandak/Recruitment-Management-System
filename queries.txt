@@ -1,0 +1,59 @@
+create database tempproj;
+
+use database tempproj;
+
+create table employer (
+	id int auto_increment,
+	name varchar(50),
+	gender varchar(1),
+	likes int,
+	mobile varchar(10),
+	city varchar(20),
+	password varchar(20),
+	email_id varchar(30),
+	organization_name varchar(50),
+	primary key (id)
+);
+
+create table job (
+	available int,
+	id int auto_increment,
+	timing varchar(50),
+	requirement varchar(150),
+	city varchar(20),
+	role varchar(30),
+	eid int,
+	contact varchar(30),
+	area varchar(30),
+	organization_name varchar(50),
+	salary int,
+	primary key (id),
+	foreign key (eid) references employer (id)
+);
+
+create table job_seeker (
+	id int auto_increment,
+	name varchar(50),
+	age int,
+	gender varchar(1),
+	likes int,
+	education varchar(50),
+	email_id  varchar(30),
+	password varchar(20),
+	city varchar(20),
+	area varchar(30),
+	mobile varchar(10),
+	primary key (id)
+);
+
+create table request (
+	jobid int,
+	jsid int,
+	accepted int,
+	primary key (jobid, jsid),
+	foreign key (jobid) references job (id),
+	foreign key (jsid) references job_seeker (id)
+);
+
+
+	
