@@ -43,6 +43,7 @@ create table job_seeker (
 	city varchar(20),
 	area varchar(30),
 	mobile varchar(10),
+	available int,
 	primary key (id)
 );
 
@@ -56,4 +57,3 @@ create table request (
 );
 
 
-	
