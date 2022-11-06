@@ -74,7 +74,7 @@ def employer_dashboard(name,eid):
             jsids += str(i[0]) + ","
         jsids = jsids[0:len(jsids)-1]
         if jsids:
-            command_handler.execute("SELECT id, name, age, gender, likes, education, city, mobile, email_id FROM job_seeker WHERE id in ({})".format(jsids))
+            command_handler.execute("SELECT id, name, age, gender, likes, education, city, mobile, email_id FROM job_seeker WHERE id in ({}) AND available=1".format(jsids))
             jobseekers = command_handler.fetchall()
         # print("")
         # print(jobseekers)
@@ -162,7 +162,7 @@ def job_seeker_dashboard(name, jsid):
     
     if request.method == 'POST' and 'sub4' in request.form:
         
-        fetch = ['name', 'age', 'gender', 'education', 'mobile', 'area', 'city', 'email_id', 'password']
+        fetch = ['name', 'age', 'gender', 'education', 'mobile', 'area', 'city', 'email_id', 'password', 'available']
 
         query_vals = []
     
@@ -170,7 +170,7 @@ def job_seeker_dashboard(name, jsid):
             query_vals.append(request.form[fetch[i]])
         query_vals.append(jsid)
 
-        command_handler.execute("UPDATE job_seeker SET name=%s, age=%s, gender=%s, education=%s, mobile=%s, area=%s, city=%s, email_id=%s, password=%s WHERE id=%s", query_vals)
+        command_handler.execute("UPDATE job_seeker SET name=%s, age=%s, gender=%s, education=%s, mobile=%s, area=%s, city=%s, email_id=%s, password=%s, available=%s WHERE id=%s", query_vals)
 
         db.commit()
 
@@ -178,7 +178,10 @@ def job_seeker_dashboard(name, jsid):
         session.pop('admin', None)
         return redirect(url_for('login'))
 
-    return render_template('job_seeker_dashboard.html', name=name, profile=profile)
+    command_handler.execute("select count(jobid) from request where jsid=%s", (jsid,))
+    tot_appl = command_handler.fetchone()
+
+    return render_template('job_seeker_dashboard.html', name=name, profile=profile, tot_appl = tot_appl[0])
 
 @app.route('/search_job<jsid>', methods=['GET', 'POST'])
 def search_job(jsid):
@@ -231,7 +234,7 @@ def registration():
             query_vals.append(request.form['area'])
             query_vals.append(request.form['age'])
             query_vals.append(request.form['education'])
-            command_handler.execute("INSERT INTO job_seeker (name, gender, mobile, city, password, email_id, area, age, education) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", query_vals)
+            command_handler.execute("INSERT INTO job_seeker (name, gender, mobile, city, password, email_id, area, age, education, available) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 1)", query_vals)
 
         db.commit()
     

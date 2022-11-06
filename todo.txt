@@ -1,4 +1,3 @@
-
 job seeker creates skills
 jobs has requirements
 
@@ -9,15 +8,16 @@ job seeker dashborad:
 search jobs:
 3. shift
 
-employer se education and age nhi leni
-on delete cascade
-applied jobs
+**employer se education and age nhi leni
+
+**applied jobs
+
 vacancies available
 
-update job me role me dropdown
+**update job me role me dropdown
 record saved
 jif konsa part kb  
-error handling user already exists ...
+**error handling user already exists ...
 
 =======================================
 search job_seekers

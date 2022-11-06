@@ -11,48 +11,53 @@
     <div class="m-4">
         <h3>Welcome {{name}}</h3>
     
-        <form method="POST" style="width: 180pt;">
+        <form method="POST">
             <div class="m-3">
             <button type="submit" name="profile">profile</button>
-            <div style="height: 10pt;"></div>
+            <br>
+            <br>
             <button type="submit" name="searchjob">Search Job</button>
             {% if request.method == 'POST' and 'profile' in request.form %}
             </div>
             <div >
-                name
-                <input type="text" name="name" value="{{profile[1]}}">
+                Name<br>
+                <input required type="text" name="name" value="{{profile[1]}}">
             </div>
             <div >
-                age
-                <input type="text" name="age" value="{{profile[2]}}">
+                Age<br>
+                <input required type="text" name="age" value="{{profile[2]}}">
             </div>
             <div >
-                gender
-                <input type="text" name="gender" value="{{profile[3]}}">
+                Gender<br>
+                <input required type="text" name="gender" value="{{profile[3]}}">
+            </div> 
+            <div >
+                Education<br>
+                <input required type="text" name="education" value="{{profile[5]}}">
             </div>
             <div >
-                education
-                <input type="text" name="education" value="{{profile[5]}}">
+                Mobile<br>
+                <input required type="text" name="mobile" value="{{profile[10]}}">
             </div>
             <div >
-                mobile
-                <input type="text" name="mobile" value="{{profile[10]}}">
+                Area<br>
+                <input required type="text" name="area" value="{{profile[9]}}">
             </div>
             <div >
-                area
-                <input type="text" name="area" value="{{profile[9]}}">
+                City<br>
+                <input required type="text" name="city" value="{{profile[8]}}">
             </div>
             <div >
-                city
-                <input type="text" name="city" value="{{profile[8]}}">
+                Email id<br>
+                <input required type="text" name="email_id" value="{{profile[6]}}">
             </div>
             <div >
-                email_id
-                <input type="text" name="email_id" value="{{profile[6]}}">
+                Password<br>
+                <input required type="text" name="password" value="{{profile[7]}}">
             </div>
             <div >
-                password
-                <input type="text" name="password" value="{{profile[7]}}">
+                Available<br>
+                <input required type="text" name="available" value="{{profile[11]}}">
             </div>
             <div class="m-3">
                 <button type="submit" name="sub4">save profile</button>
@@ -64,8 +69,15 @@
             <br>
             <button type="submit" name="logo">Logout</button>
         
-        
         </form>
+        <br>
+        <br>
+        <div>
+            <strong>
+                You have applied in total {{tot_appl}} job applications.
+                <br>We will update you if the status changes.
+            </strong> 
+        </div>
     </div>
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
