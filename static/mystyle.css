@@ -1,0 +1,57 @@
+/* .highlight:hover {
+    border: 2px solid black;
+} */
+
+button{
+    width: 100px;
+    /* height: 22px; */
+}
+select{
+    border-radius: 0px;
+    height: 22px;
+}
+.idbtn{
+    width: 150px;
+    height: 22px;
+}
+.inp{
+    width: 220px;
+    height: 22px;
+}
+.req{
+    height: 88px;
+    display: flex;
+    font-size: 14px;
+}
+.padin6{
+    padding-inline: 12px;
+}
+.m{
+    margin: 10px;
+}
+.ml{
+    margin-left: 10px;
+}
+.myflex{
+    display: flex;
+    flex-wrap: wrap;
+}
+.half{
+    width: 500px;
+}
+.gap{
+    height: 10px;
+}
+.myflex2{
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+}
+.mygrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.gitem{
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
