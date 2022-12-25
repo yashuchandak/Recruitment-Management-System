@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, session, request, url_for
 
 import mysql.connector as connector
 
-import smtplib
+# import smtplib
 
 app = Flask(__name__)
 
@@ -38,6 +38,7 @@ def login():
                 session['admin'] = 'admin'
                 return redirect(url_for('employer_dashboard', name=present[0], eid=present[1]))
         else:
+            # print("hi")
             command_handler.execute("SELECT name, id FROM job_seeker WHERE email_id=%s and password=%s", (email, passw,))
             present=command_handler.fetchone()
             if present:
@@ -204,7 +205,7 @@ def search_job(jsid):
         for i in test:
             rolestr += '"' + i + '"' + ","
         rolestr = rolestr[0:len(rolestr)-1]
-        command_handler.execute("Select id, role, timing, requirement, salary, area, contact FROM job WHERE salary>=%s AND city=%s AND role IN ({})".format(rolestr), (minsal, city,))
+        command_handler.execute("Select id, role, timing, requirement, salary, area, contact, organization_name FROM job WHERE salary>=%s AND city=%s AND role IN ({})".format(rolestr), (minsal, city,))
         jobs=command_handler.fetchall()
 
     if request.method=="POST" and 'apply' in request.form:
