@@ -8,3 +8,7 @@
 * MySQL
 * Python
 * HTML
+<<<<<<< HEAD
+
+=======
+>>>>>>> dest/master
