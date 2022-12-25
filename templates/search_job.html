@@ -1,63 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>search_job</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <style>
-        .padin6{
-          padding-inline: 6pt;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/mystyle.css">
 </head>
+
 <body>
-    <div class="m-4">
+    <div>
         <form method="POST">
-            <div class="m-2">
+            <div>
                 City<br>
                 <input type="text" name="city" value="{{city[0]}}">
             </div>
-            <div class="m-2">
+            <br>
+            <div>
                 Minimum salary<br>
                 <input type="text" name="salary">
             </div>
-            <div class="m-2">
+            <br>
+            <div>
                 Role<br>
                 <select multiple name="role" style="height: 200pt; width: 150pt">
                     {% for i in roles %}
-                        <option value="{{i}}">{{i}}</option>
+                    <option value="{{i}}">{{i}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <!-- <div class="m-2">
-                Shift
-                <input type="text" name="shift">
-            </div>
-            <div class="m-2">
-                Role
-                <input type="text" name="role">
-            </div> -->
-            <div class="m-3">
-                <button type="submit" name="search">Search</button>
-            </div>
-        
-
-        {% if request.method=="POST" %}
-        <br>
-        Apply for Job
-        <br>
-        <input type="text" placeholder="Job ID" name="jobid">
-        <button type="submit" name="apply">apply</button>
-    </form>
+            <br>
+            <button class="highlight" type="submit" name="search">Search</button>
+            {% if request.method=="POST" %}
+            <br>
+            <br>
+            Apply for Job
+            <br>
+            <input type="text" placeholder="Job ID" name="jobid">
+            <button class="highlight" type="submit" name="apply">apply</button>
+        </form>
         <br>
         <table>
             <tr style="border-bottom: 1pt solid">
                 <th class="padin6">ID</th>
                 <th class="padin6">Role</th>
+                <th class="padin6">Organization name</th>
                 <th class="padin6">Timing</th>
                 <th class="padin6">Requirement</th>
                 <th class="padin6">Salary</th>
@@ -68,16 +52,18 @@
             <tr style="border-bottom: 1pt solid">
                 <td class="padin6">{{i[0]}}</td>
                 <td class="padin6">{{i[1]}}</td>
+                <td class="padin6">{{i[7]}}</td>
                 <td class="padin6">{{i[2]}}</td>
                 <td class="padin6">{{i[3]}}</td>
                 <td class="padin6">{{i[4]}}</td>
                 <td class="padin6">{{i[5]}}</td>
                 <td class="padin6">{{i[6]}}</td>
-            </tr>                    
+            </tr>
             {% endfor %}
         </table>
-        
+
         {% endif %}
     </div>
 </body>
+
 </html>

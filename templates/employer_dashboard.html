@@ -1,26 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <style>
-        .padin6{
-          padding-inline: 6pt;
-        }
-        
-    </style>
+<head>
+    <title>dashboard</title>
+    <link rel="stylesheet" href="../static/mystyle.css">
 </head>
+
 <body class="m-4">
     <h3>Welcome {{name}}</h3>
     <br>
-    <h5>Jobs Posted</h5>
-    
-    <table>
-        <tr style="border-bottom: 1pt solid">
+    <strong>Jobs Posted</strong>
+    <br>
+    <br>
+    <table rules="rows">
+        <tr>
             <th class="padin6">Id</th>
             <th class="padin6">Role</th>
             <th class="padin6">Timing</th>
@@ -30,8 +22,8 @@
             <th class="padin6">Organization name</th>
             <th class="padin6">Contact</th>
         </tr>
-    {% for i in jobs %}
-        <tr style="border-bottom: 1pt solid">
+        {% for i in jobs %}
+        <tr>
             <td class="padin6">{{i[0]}}</td>
             <td class="padin6">{{i[1]}}</td>
             <td class="padin6">{{i[2]}}</td>
@@ -41,18 +33,20 @@
             <td class="padin6">{{i[6]}}</td>
             <td class="padin6">{{i[7]}}</td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </table>
     <br>
-    
+    <br>
     <form method="POST">
         See Applications<br>
-        <input type="text" name="seejobid" value="{{request.form['seejobid']}}" placeholder="Enter Job ID">
-        <button type="submit" name="see">Go</button>
+        <div class="gap"></div>
+        <input class="idbtn" type="text" name="seejobid" value="{{request.form['seejobid']}}"
+            placeholder="Enter Job ID">
+        <button class="highlight" type="submit" name="see">Go</button>
         <div style="height: 10pt;"></div>
         {% if request.method=="POST" and "see" in request.form %}
-        
-        <table>
+
+        <table rules="rows">
             <tr style="border-bottom: 1pt solid">
                 <th class="padin6">ID</th>
                 <th class="padin6">Name</th>
@@ -64,7 +58,7 @@
                 <th class="padin6">Email</th>
                 <th class="padin6">Mobile</th>
             </tr>
-        {% for i in jobseekers %}
+            {% for i in jobseekers %}
             <tr style="border-bottom: 1pt solid">
                 <td class="padin6">{{i[0]}}</td>
                 <td class="padin6">{{i[1]}}</td>
@@ -76,150 +70,197 @@
                 <td class="padin6">{{i[7]}}</td>
                 <td class="padin6">{{i[8]}}</td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </table>
         <br>
         <div class="ml-4">
             Accept Request<br>
-            <input type="text" name="reqjsid" placeholder="Enter Job Seekers ID">
-            <button type="submit" name="accreq">Go</button>
+            <input class="idbtn" type="text" name="reqjsid" placeholder="Enter Job Seekers ID">
+            <button class="highlight" type="submit" name="accreq">Go</button>
         </div>
+        <br>
         {% endif %}
         
         <div style="height: 20pt;"></div>
         <div>
-            <label>Update Job Application</label><br>
-            <input name="jobid" type="text" placeholder="Enter Job ID">
-            <button type="submit" name='sub1'>Go</button>
+            Update Job Application<br>
+            <div class="gap"></div>
+            <input class="idbtn" name="jobid" type="text" placeholder="Enter Job ID">
+            <button class="highlight" type="submit" name='sub1'>Go</button>
         </div>
         {% if request.method == 'POST' and 'sub1' in request.form %}
-        <div>
-            <div class="m-2">
+        <br>
+        <div class="mygrid half">
+            <div class="m">
                 Available<br>
-                <input type="text" name="available" value="{{fulljob[0]}}">
+                <input class="inp" type="text" name="available" value="{{fulljob[0]}}">
             </div>
-            <div class="m-2">
+            <div class="m">
                 Timing<br>
-                <input type="text" name="timing" value="{{fulljob[1]}}">
+                <input class="inp" type="text" name="timing" value="{{fulljob[1]}}">
             </div>
-            <div class="m-2">
+            <div class="m gitem">
                 Requirements<br>
-                <input type="text" name="requirement" value="{{fulljob[2]}}">
+                <textarea class="inp req" name="requirement">{{fulljob[2]}}</textarea>
             </div>
-            <div class="m-2">
+            <div class="m">
                 City<br>
-                <input type="text" name="city" value="{{fulljob[3]}}">
+                <input class="inp" type="text" name="city" value="{{fulljob[3]}}">
             </div>
-            <div class="m-2">
+            <div class="m">
                 Role<br>
-                <input type="text" name="role" value="{{fulljob[4]}}">
+                <input class="inp" type="text" name="role" value="{{fulljob[4]}}">
             </div>
-            <div class="m-2">
+            <div class="m">
                 Salary<br>
-                <input type="text" name="salary" value="{{fulljob[5]}}">
+                <input class="inp" type="text" name="salary" value="{{fulljob[5]}}">
             </div>
-            <div class="m-2">
+            <div class="m">
                 Area<br>
-                <input type="text" name="area" value="{{fulljob[6]}}">
+                <input class="inp" type="text" name="area" value="{{fulljob[6]}}">
             </div>
-            <div class="m-2">
+            <div class="m">
                 Contact<br>
-                <input type="text" name="contact" value="{{fulljob[7]}}">
+                <input class="inp" type="text" name="contact" value="{{fulljob[7]}}">
             </div>
-            <div class="m-2">
+            <div class="m">
                 Organization name<br>
-                <input type="text" name="orgname" value="{{fulljob[8]}}">
+                <input class="inp" type="text" name="orgname" value="{{fulljob[8]}}">
             </div>
         </div>
         <div style="height: 10pt;"></div>
-        <button type="submit" name='sub2'>Save Application</button>
+        <button class="ml highlight" type="submit" name='sub2'>Save Application</button>
+        <br>
+        <div class="half"><hr></div>
         {% endif %}
 
-        <div style="height: 20pt;"></div>
-        <button type="submit" name="profile">profile</button>
+        <br>
+        <br>
+        <button class="highlight" type="submit" name="profile">Profile</button>
         {% if request.method == 'POST' and 'profile' in request.form %}
-        <div style="width: 180pt;">
-            <div class="m-2">
-                Name
-                <input required type="text" name="name" value="{{profile[0]}}">
+        <div class="myflex half">
+            <div class="m">
+                Name<br>
+                <input class="inp" required type="text" name="name" value="{{profile[0]}}">
             </div>
-            <div class="m-2">
-                Gender
-                <input required type="text" name="gender" value="{{profile[1]}}">
+            <div class="m">
+                Gender<br>
+                <input class="inp" required type="text" name="gender" value="{{profile[1]}}">
             </div>
-            <div class="m-2">
-                Business name
-                <input required type="text" name="education" value="{{profile[2]}}">
+            <div class="m">
+                Business name<br>
+                <input class="inp" required type="text" name="education" value="{{profile[2]}}">
             </div>
-            <div class="m-2">
-                Mobile
-                <input type="text" name="mobile" value="{{profile[3]}}">
+            <div class="m">
+                Mobile<br>
+                <input class="inp" type="text" name="mobile" value="{{profile[3]}}">
             </div>
-            <div class="m-2">
-                City
-                <input type="text" name="city" value="{{profile[4]}}">
+            <div class="m">
+                City<br>
+                <input class="inp" type="text" name="city" value="{{profile[4]}}">
             </div>
-            <div class="m-2">
-                Email id
-                <input required type="email" name="email_id" value="{{profile[5]}}">
+            <div class="m">
+                Email id<br>
+                <input class="inp" required type="email" name="email_id" value="{{profile[5]}}">
             </div>
-            <div class="m-2">
-                Password
-                <input required type="pasword" name="password" value="{{profile[6]}}">
+            <div class="m">
+                Password<br>
+                <input class="inp" required type="pasword" name="password" value="{{profile[6]}}">
             </div>
-        </div class="m-2">
-        <div style="height: 10pt;"></div>
-        <button type="submit" name="sub4">save profile</button>
+        </div>
+        <div class="gap"></div>
+        <button class="ml highlight" type="submit" name="sub4">Save profile</button>
+        <div class="half"><hr></div>
         {% endif %}
-
-        <div style="height: 20pt;"></div>
-        <button type="submit" name="newjob">new job</button>
+        <br>
+        <br>
+        <br>
+        <button class="highlight" type="submit" name="newjob">New job</button>
         {% if request.method == 'POST' and 'newjob' in request.form %}
-        <div style="width: 180pt;">
-            <div class="m-2">
-                Role
-                <select required type name="nrole" >
+        <!-- <div class="ml myflex half">
+            <div class="m">
+                Role<br>
+                <select class="inp" required type name="nrole">
                     {% for i in roles %}
-                        <option value="{{i}}">{{i}}</option>
+                    <option value="{{i}}">{{i}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="m-2">
-                Timing
-                <input required type="text" name="ntiming" >
+            <div class="m">
+                Timing<br>
+                <input class="inp" required type="text" name="ntiming">
             </div>
-            <div class="m-2">
-                Requirement
-                <input required type="text" name="nrequirement" >
+            <div class="m">
+                Requirement<br>
+                <textarea class="inp req" required name="nrequirement"></textarea>
             </div>
-            <div class="m-2">
-                City
-                <input required type="text" name="ncity" >
+            <div class="m">
+                City<br>
+                <input class="inp" required type="text" name="ncity">
             </div>
-            <div class="m-2">
-                Salary per month
-                <input required type="text" name="nsalary" >
+            <div class="m">
+                Salary per month<br>
+                <input class="inp" required type="text" name="nsalary">
             </div>
-            <div class="m-2">
-                Area
-                <input type="text" name="narea" >
+            <div class="m">
+                Area<br>
+                <input class="inp" type="text" name="narea">
             </div>
-            <div class="m-2">
-                Contact
-                <input type="text" name="ncontact" >
+            <div class="m">
+                Contact<br>
+                <input class="inp" type="text" name="ncontact">
             </div>
-            <div class="m-2">
-                Organization name
-                <input type="text" name="norgname" >
+            <div class="m">
+                Organization name<br>
+                <input class="inp" type="text" name="norgname">
+            </div>
+        </div> -->
+        <div class="ml mygrid half">
+            <div class="m">
+                Role<br>
+                <select class="inp" required type name="nrole">
+                    {% for i in roles %}
+                    <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="m">
+                Timing<br>
+                <input class="inp" required type="text" name="ntiming">
+            </div>
+            <div class="m gitem">
+                Requirement<br>
+                <textarea class="inp req " required name="nrequirement"></textarea>
+            </div>
+            <div class="m">
+                City<br>
+                <input class="inp" required type="text" name="ncity">
+            </div>
+            <div class="m">
+                Salary per month<br>
+                <input class="inp" required type="text" name="nsalary">
+            </div>
+            <div class="m">
+                Area<br>
+                <input class="inp" type="text" name="narea">
+            </div>
+            <div class="m">
+                Contact<br>
+                <input class="inp" type="text" name="ncontact">
+            </div>
+            <div class="m">
+                Organization name<br>
+                <input class="inp" type="text" name="norgname">
             </div>
         </div>
-        <div style="height: 10pt;"></div>
-        <button type="submit" name="sub3">Save Job</button>
+
+        <button class="m highlight" type="submit" name="sub3">Save Job</button>
         {% endif %}
         <br>
         <br>
-        <button type="submit" name="logo">Logout</button>
-        </form>
-    
-    </body>
+        <br>
+        <button class="highlight" type="submit" name="logo">Logout</button>
+    </form>
+</body>
+
 </html>
